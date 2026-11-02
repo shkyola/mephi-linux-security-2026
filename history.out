@@ -1,0 +1,79 @@
+    1  whoami 
+    2  uname -m
+    3  id
+    4  sudo -v
+    5  echo "$HISTFILE"
+    6  export PROMPT_COMMAND='history -a'
+    7  clear
+    8  getent group students
+    9  sudo groupadd students
+   10  getent group students
+   11  sudo useradd -m -u 1234 -G students user1
+   12  id user1 
+   13  sudo passwd user1 
+   14  sudo chage -M 90 user1
+   15  sudo chage -l user1 
+   16  sudo find / -type f -perm -4000 2>/dev/null 
+   17  sudo find / -type f -perm -4000 > ~/find-setuid.out 2> ~/find-setuid-errors.out
+   18  cat  ~/find-setuid-errors.out 
+   19  cat  ~/find-setuid.out 
+   20  ps -eo pid,ruid,euid,user,comm
+   21  ps -eo pid,ruid,euid,comm | awk 'NR==1 ($2>=1000 && $3==0)'
+   22  ps -eo pid,ruid,euid,user,comm | awk 'NR==1 || ($2>=1000 && $3==0)'
+   23  passwd 
+   24  ls -l /usr/bin/cat
+   25  cp /usr/bin/cat ~/cat-lab
+   26  ls -l cat-lab 
+   27  sudo chown root:root ~/cat-lab 
+   28  ls -l ~/cat-lab 
+   29  sudo chmod u+s ~/cat-lab 
+   30  ls -l ~/cat-lab 
+   31  sudo sh -c "Set-UID test" > /root/test.txt
+   32  sudo sh -c 'echo "Set-UID test" > /root/test.txt'
+   33  cat /root/test.txt
+   34  ~/cat-lab /root/test.txt
+   35  stat ~/cat-lab > ~/stat.out
+   36  cat ~/stat.out 
+   37  which setcup
+   38  which setcap 
+   39  which chown
+   40  cp /usr/bin/chown ~/chown-lab
+   41  ls -l ~/chown-lab 
+   42  touch ~/test.txt
+   43  ls -l ~/test.txt 
+   44  ~/chown-lab root ~/test.txt 
+   45  sudo setcap cap_chown+ep ~/chown-lab 
+   46  getcap ~/chown-lab 
+   47  ~/chown-lab root ~/test.txt 
+   48  ls -l ~/test.txt 
+   49  getcap ~/chown-lab > ~/getcup.out
+   50  cat ~/getcup.out 
+   51  mv ~/getcup.out ~/getcap.out
+   52  cat ~/getcap.out 
+   53  which timedatectl 
+   54  which visudo
+   55  sudo EDITOR=nano visudo -f /etc/sudoers.d/user1-time
+   56  sudo visudo -c
+   57  sudo chmod 0440 /etc/sudoers.d/user1-time
+   58* sudo -
+   59  sudo -1 -U user1
+   60  sudo -l -U user1
+   61  su - user1
+   62  sudo timedatectl set-ntp false 
+   63  timedatectl status 
+   64  su - user1
+   65  sudo cat /etc/sudoers.d/user1-time
+   66  sudo visudo -f /etc/sudoers.d/user1-time
+   67  sudo visudo -c
+   68  sudo -l -U user1 /usr/bin/timedatectl set-time "2026-11-02 00:05:00"
+   69  su - user1
+   70  sudo timedatectl set-ntp true 
+   71  timedatectl status 
+   72  sudo cp /etc/sudoers.d/user1-time ~user1-time
+   73  sudo cat ~/user1-time
+   74  sudo cp /etc/sudoers.d/user1-time ~/user1-time
+   75  sudo cat ~/user1-time
+   76  sudo -l -U user1 > ~/sudo-user1.out
+   77  cat ~/sudo-user1.out 
+   78  history | tail -20
+   79  history > ~/history.out
